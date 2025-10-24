@@ -38,7 +38,7 @@ export default function DoradaFoodsLinktree() {
     {
       name: "Nuestro Menú",
       icon: FileText,
-      url: "/menu.pdf",
+      url: "/menu-dorada-foods.pdf",
       description: "Ver menú completo en PDF",
       gradient: "from-purple-600 to-purple-800",
     },
