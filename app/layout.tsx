@@ -5,9 +5,9 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'Dorada Foods Restaurante',
+  description: 'Delicosas comidas preparadas con amor',
+  generator: 'Doada Foods Generator',
 }
 
 export default function RootLayout({
