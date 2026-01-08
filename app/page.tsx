@@ -24,7 +24,7 @@ export default function DoradaFoodsLinktree() {
     {
       name: "WhatsApp",
       icon: MessageCircle,
-      url: "https://wa.me/573001234567?text=Hola,%20quiero%20hacer%20un%20pedido",
+      url: "https://wa.me/573332926737?text=Hola,%20quiero%20hacer%20un%20pedido",
       description: "Haz tu pedido ahora",
       gradient: "from-green-500 to-green-700",
     },
