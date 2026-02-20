@@ -36,7 +36,7 @@ export default function DoradaFoodsLinktree() {
       gradient: "from-gray-800 to-black",
     },
     {
-      name: "Nuestros Sabores Gourmet y Tradicionales",
+      name: "Sabores Gourmet y Tradicionales",
       icon: FileText,
       url: "/docs/dorada-foods-almuerzos.pdf",
       description: "Ver menú completo en PDF",
