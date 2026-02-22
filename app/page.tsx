@@ -45,7 +45,7 @@ export default function DoradaFoodsLinktree() {
     {
       name: "Comidas Rápidas y Asados",
       icon: FileText,
-      url: "/docs/dorada-foods-comidas-rapidas-y-asados.pdf",
+      url: "/docs/dorada-foods-comida-rapidas.pdf",
       description: "Ver menú de comidas rápidas y asados en PDF",
       gradient: "from-red-600 to-red-800",
     },

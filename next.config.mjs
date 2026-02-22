@@ -13,7 +13,7 @@ const nextConfig = {
     return [
       {
         source: "/docs/menu-dorada-foods.pdf",
-        destination: "/",
+        destination: "/docs/dorada-foods-comida-rapidas.pdf",
         permanent: true,
       },
     ];
