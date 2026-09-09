@@ -8,6 +8,20 @@ export default function DoradaFoodsLinktree() {
 
   const socialLinks = [
     {
+      name: "Desayunos y Almuerzos",
+      icon: FileText,
+      url: "/docs/dorada-foods-almuerzos.pdf",
+      description: "Ver menú completo en PDF",
+      gradient: "from-purple-600 to-purple-800",
+    },
+    {
+      name: "Comidas Rápidas y Asados",
+      icon: FileText,
+      url: "/docs/dorada-foods-comida-rapida.pdf",
+      description: "Ver menú de comidas rápidas y asados en PDF",
+      gradient: "from-red-600 to-red-800",
+    },
+    {
       name: "Instagram",
       icon: Instagram,
       url: "https://www.instagram.com/doradafoods",
@@ -35,20 +49,6 @@ export default function DoradaFoodsLinktree() {
       description: "Síguenos en TikTok",
       gradient: "from-gray-800 to-black",
     },
-    {
-      name: "Sabores Gourmet y Tradicionales",
-      icon: FileText,
-      url: "/docs/dorada-foods-almuerzos.pdf",
-      description: "Ver menú completo en PDF",
-      gradient: "from-purple-600 to-purple-800",
-    },
-    {
-      name: "Comidas Rápidas y Asados",
-      icon: FileText,
-      url: "/docs/dorada-foods-comida-rapida.pdf",
-      description: "Ver menú de comidas rápidas y asados en PDF",
-      gradient: "from-red-600 to-red-800",
-    },
   ];
 
   return (
@@ -59,7 +59,7 @@ export default function DoradaFoodsLinktree() {
           className='w-full h-full'
           style={{
             backgroundImage: "radial-gradient(circle, #f97316 1px, transparent 1px)",
-            backgroundSize: "30px 30px",
+            backgroundSize: "50px 50px",
           }}
         ></div>
       </div>
@@ -69,28 +69,26 @@ export default function DoradaFoodsLinktree() {
         <div className='text-center mb-8'>
           {/* Logo */}
           <div className='mb-6'>
-            <div className='w-32 h-32 mx-auto bg-gradient-to-br from-amber-400 via-orange-500 to-red-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-white'>
-              <div className='text-white font-bold text-3xl tracking-wider'>DF</div>
-            </div>
+            <img
+              src='/dorada-foods-logo.png'
+              alt='Dorada Foods'
+              className='w-50 h-50 mx-auto object-contain drop-shadow-xl'
+            />
           </div>
 
           {/* Brand Name */}
-          <h1 className='text-4xl font-bold bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent mb-2'>
+          {/* <h1 className='text-4xl font-bold bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent mb-2'>
             Dorada Foods
-          </h1>
+          </h1> */}
 
           {/* Subtitle */}
-          <p className='text-lg font-medium text-amber-800 mb-4'>Restaurante Premium</p>
+          {/* <p className='text-lg font-medium text-amber-800 mb-4'>Restaurante Premium</p> */}
 
           {/* Description */}
           <Card className='p-6 bg-white/80 backdrop-blur-sm border-0 shadow-lg'>
             <p className='text-gray-700 leading-relaxed text-center'>
               🍽️ <span className='font-semibold text-amber-700'>Somos una nueva familia</span> que
               está cocinando algo realmente sabroso para ti.
-              <br />
-              <br />
-              Desde comidas a la carta hasta opciones rápidas, cada plato está preparado con amor y
-              los mejores ingredientes.
               <br />
               <br />
               <span className='text-orange-600 font-medium'>¡Bienvenido a nuestra mesa! 👨‍🍳👩‍🍳</span>
