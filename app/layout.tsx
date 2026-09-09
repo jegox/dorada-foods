@@ -18,13 +18,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <style>{`
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
 html {
   font-family: ${GeistSans.style.fontFamily};
   --font-sans: ${GeistSans.variable};
   --font-mono: ${GeistMono.variable};
 }
-        `}</style>
+            `,
+          }}
+        />
       </head>
       <body>
         {children}
