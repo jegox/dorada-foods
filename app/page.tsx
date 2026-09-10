@@ -1,136 +1,154 @@
-import { Instagram, Facebook, MessageCircle, FileText } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { TikTokIcon } from "@/components/tiktok-icon";
+"use client";
 
-export default function DoradaFoodsLinktree() {
+import { useEffect, useState } from "react";
+import { useHoverCapable } from "@/hooks/use-hover-capable";
+import { resolveScheduledMenu, type MenuKey } from "@/lib/menu-schedule";
+import { AmbientBackground } from "@/components/linkpage/ambient-background";
+import { MenuPhotoLayer } from "@/components/linkpage/menu-photo-layer";
+import { MenuCard } from "@/components/linkpage/menu-card";
+import { SocialRow } from "@/components/linkpage/social-row";
+
+const GOURMET_MENU = {
+  href: "/docs/dorada-foods-almuerzos.pdf",
+  title: "Desayunos y Almuerzos",
+  subtitle: "Ver menú completo en PDF",
+};
+
+const RAPIDAS_MENU = {
+  href: "/docs/dorada-foods-comida-rapida.pdf",
+  title: "Comidas Rápidas y Asados",
+  subtitle: "Ver menú de comidas rápidas y asados en PDF",
+};
+
+const WHATSAPP_URL = "https://wa.me/573332926737?text=Hola,%20quiero%20hacer%20un%20pedido";
+
+const SOCIAL_LINKS = [
+  {
+    href: "https://www.instagram.com/doradafoods",
+    name: "Instagram",
+    description: "Síguenos para ver nuestros platos",
+    badgeClassName: "badge-ig",
+    badgeContent: "IG",
+  },
+  {
+    href: "https://www.facebook.com/doradafoods",
+    name: "Facebook",
+    description: "Únete a nuestra comunidad",
+    badgeClassName: "badge-fb",
+    badgeContent: "f",
+  },
+  {
+    href: WHATSAPP_URL,
+    name: "WhatsApp",
+    description: "Haz tu pedido ahora",
+    badgeClassName: "badge-wa",
+    badgeContent: "W",
+  },
+  {
+    href: "https://www.tiktok.com/@doradafoods",
+    name: "TikTok",
+    description: "Síguenos en TikTok",
+    badgeClassName: "badge-tt",
+    badgeContent: "TT",
+  },
+];
+
+const SCHEDULE_RECHECK_MS = 5 * 60 * 1000;
+
+export default function DoradaFoodsLinkPage() {
   const currentYear = new Date().getFullYear();
+  const hoverCapable = useHoverCapable();
+  const [hoveredMenu, setHoveredMenu] = useState<MenuKey>(null);
+  const [scheduledMenu, setScheduledMenu] = useState<MenuKey>(null);
 
-  const socialLinks = [
-    {
-      name: "Desayunos y Almuerzos",
-      icon: FileText,
-      url: "/docs/dorada-foods-almuerzos.pdf",
-      description: "Ver menú completo en PDF",
-      gradient: "from-purple-600 to-purple-800",
-    },
-    {
-      name: "Comidas Rápidas y Asados",
-      icon: FileText,
-      url: "/docs/dorada-foods-comida-rapida.pdf",
-      description: "Ver menú de comidas rápidas y asados en PDF",
-      gradient: "from-red-600 to-red-800",
-    },
-    {
-      name: "Instagram",
-      icon: Instagram,
-      url: "https://www.instagram.com/doradafoods",
-      description: "Síguenos para ver nuestros platos",
-      gradient: "from-pink-500 to-orange-500",
-    },
-    {
-      name: "Facebook",
-      icon: Facebook,
-      url: "https://www.facebook.com/doradafoods",
-      description: "Únete a nuestra comunidad",
-      gradient: "from-blue-600 to-blue-800",
-    },
-    {
-      name: "WhatsApp",
-      icon: MessageCircle,
-      url: "https://wa.me/573332926737?text=Hola,%20quiero%20hacer%20un%20pedido",
-      description: "Haz tu pedido ahora",
-      gradient: "from-green-500 to-green-700",
-    },
-    {
-      name: "TikTok",
-      icon: TikTokIcon,
-      url: "https://www.tiktok.com/@doradafoods",
-      description: "Síguenos en TikTok",
-      gradient: "from-gray-800 to-black",
-    },
-  ];
+  useEffect(() => {
+    if (hoverCapable) return;
+
+    const update = () => setScheduledMenu(resolveScheduledMenu());
+    update();
+    const interval = setInterval(update, SCHEDULE_RECHECK_MS);
+    return () => clearInterval(interval);
+  }, [hoverCapable]);
+
+  const activeMenu = hoverCapable ? hoveredMenu : scheduledMenu;
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-red-50'>
-      {/* Background Pattern */}
-      <div className='absolute inset-0 opacity-30'>
-        <div
-          className='w-full h-full'
-          style={{
-            backgroundImage: "radial-gradient(circle, #f97316 1px, transparent 1px)",
-            backgroundSize: "50px 50px",
-          }}
-        ></div>
-      </div>
+    <>
+      <AmbientBackground />
+      <MenuPhotoLayer active={activeMenu} />
 
-      <div className='relative z-10 container mx-auto px-4 py-8 max-w-md'>
-        {/* Header Section */}
-        <div className='text-center mb-8'>
-          {/* Logo */}
-          <div className='mb-6'>
-            <img
-              src='/dorada-foods-logo.png'
-              alt='Dorada Foods'
-              className='w-50 h-50 mx-auto object-contain drop-shadow-xl'
-            />
+      <main className='linkpage'>
+        <header>
+          <div className='logo-wrap'>
+            <span className='logo-ring' />
+            <img src='/dorada-foods-logo.png' alt='Dorada Foods' />
+          </div>
+          {/* <h1>Dorada Foods</h1>
+          <p className="kicker">Restaurante Premium</p> */}
+        </header>
+
+        <section className='menus'>
+          <div className='rule'>
+            <span />
+            <b>Nuestras cartas</b>
+            <span />
           </div>
 
-          {/* Brand Name */}
-          {/* <h1 className='text-4xl font-bold bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent mb-2'>
-            Dorada Foods
-          </h1> */}
+          <MenuCard
+            href={GOURMET_MENU.href}
+            title={GOURMET_MENU.title}
+            subtitle={GOURMET_MENU.subtitle}
+            variant='gourmet'
+            onPointerActivate={hoverCapable ? () => setHoveredMenu("gourmet") : undefined}
+            onPointerDeactivate={hoverCapable ? () => setHoveredMenu(null) : undefined}
+          />
 
-          {/* Subtitle */}
-          {/* <p className='text-lg font-medium text-amber-800 mb-4'>Restaurante Premium</p> */}
+          <MenuCard
+            href={RAPIDAS_MENU.href}
+            title={RAPIDAS_MENU.title}
+            subtitle={RAPIDAS_MENU.subtitle}
+            variant='rapidas'
+            onPointerActivate={hoverCapable ? () => setHoveredMenu("rapidas") : undefined}
+            onPointerDeactivate={hoverCapable ? () => setHoveredMenu(null) : undefined}
+          />
 
-          {/* Description */}
-          <Card className='p-6 bg-white/80 backdrop-blur-sm border-0 shadow-lg'>
-            <p className='text-gray-700 leading-relaxed text-center'>
-              🍽️ <span className='font-semibold text-amber-700'>Somos una nueva familia</span> que
-              está cocinando algo realmente sabroso para ti.
-              <br />
-              <br />
-              <span className='text-orange-600 font-medium'>¡Bienvenido a nuestra mesa! 👨‍🍳👩‍🍳</span>
-            </p>
-          </Card>
+          <a className='wa-btn' href={WHATSAPP_URL} target='_blank' rel='noopener noreferrer'>
+            <span className='wa-dot' />
+            Haz tu pedido ahora por WhatsApp
+          </a>
+        </section>
+
+        <div className='scroll-cue'>
+          <span>Conócenos</span>
+          <span className='arrow'>&#8595;</span>
         </div>
 
-        {/* Social Links */}
-        <div className='space-y-4 mb-12'>
-          {socialLinks.map((link, index) => {
-            const Icon = link.icon;
-            return (
-              <Button
-                key={index}
-                asChild
-                className='w-full h-16 text-white font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border-0'
-              >
-                <a
-                  href={link.url}
-                  className={`bg-gradient-to-r ${link.gradient} flex items-center justify-center gap-4 rounded-xl`}
-                >
-                  <Icon className='w-6 h-6' />
-                  <div className='text-center'>
-                    <div className='font-bold'>{link.name}</div>
-                    <div className='text-sm opacity-90'>{link.description}</div>
-                  </div>
-                </a>
-              </Button>
-            );
-          })}
-        </div>
+        <section className='about'>
+          <p>
+            <strong>Somos una nueva familia</strong> que está cocinando algo realmente sabroso para
+            ti.
+          </p>
+          <p>
+            Desde comidas a la carta hasta opciones rápidas, cada plato está preparado con amor y
+            los mejores ingredientes.
+          </p>
+          <p className='bienvenida'>¡Bienvenido a nuestra mesa!</p>
+        </section>
 
-        {/* Footer */}
-        <footer className='text-center'>
-          <div className='border-t border-amber-200 pt-6'>
-            <p className='text-amber-700 text-sm'>
-              © {currentYear} Dorada Foods. Todos los derechos reservados.
-            </p>
-            <p className='text-amber-600 text-xs mt-2'>Cocinando con amor desde el corazón ❤️</p>
+        <section className='socials'>
+          <span>Síguenos</span>
+          <div className='list'>
+            {SOCIAL_LINKS.map((social) => (
+              <SocialRow key={social.name} {...social} />
+            ))}
           </div>
+        </section>
+
+        <footer>
+          <p>© {currentYear} Dorada Foods. Todos los derechos reservados.</p>
+          <p>Cocinando con amor desde el corazón</p>
         </footer>
-      </div>
-    </div>
+      </main>
+    </>
   );
 }
