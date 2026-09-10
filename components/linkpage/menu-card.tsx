@@ -5,6 +5,7 @@ type MenuCardProps = {
   variant: 'gourmet' | 'rapidas'
   onPointerActivate?: () => void
   onPointerDeactivate?: () => void
+  onClick?: () => void
 }
 
 export function MenuCard({
@@ -14,6 +15,7 @@ export function MenuCard({
   variant,
   onPointerActivate,
   onPointerDeactivate,
+  onClick,
 }: MenuCardProps) {
   return (
     <a
@@ -25,6 +27,7 @@ export function MenuCard({
       onMouseLeave={onPointerDeactivate}
       onFocus={onPointerActivate}
       onBlur={onPointerDeactivate}
+      onClick={onClick}
     >
       <span className="shine" />
       <span className="pdf-chip">PDF</span>

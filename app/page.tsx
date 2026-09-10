@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useHoverCapable } from "@/hooks/use-hover-capable";
 import { resolveScheduledMenu, type MenuKey } from "@/lib/menu-schedule";
+import { pushToDataLayer } from "@/lib/gtm";
 import { AmbientBackground } from "@/components/linkpage/ambient-background";
 import { MenuPhotoLayer } from "@/components/linkpage/menu-photo-layer";
 import { MenuCard } from "@/components/linkpage/menu-card";
@@ -101,6 +102,7 @@ export default function DoradaFoodsLinkPage() {
             variant='gourmet'
             onPointerActivate={hoverCapable ? () => setHoveredMenu("gourmet") : undefined}
             onPointerDeactivate={hoverCapable ? () => setHoveredMenu(null) : undefined}
+            onClick={() => pushToDataLayer({ event: "menu_click", menu: "gourmet", active_menu_context: activeMenu })}
           />
 
           <MenuCard
@@ -110,9 +112,16 @@ export default function DoradaFoodsLinkPage() {
             variant='rapidas'
             onPointerActivate={hoverCapable ? () => setHoveredMenu("rapidas") : undefined}
             onPointerDeactivate={hoverCapable ? () => setHoveredMenu(null) : undefined}
+            onClick={() => pushToDataLayer({ event: "menu_click", menu: "rapidas", active_menu_context: activeMenu })}
           />
 
-          <a className='wa-btn' href={WHATSAPP_URL} target='_blank' rel='noopener noreferrer'>
+          <a
+            className='wa-btn'
+            href={WHATSAPP_URL}
+            target='_blank'
+            rel='noopener noreferrer'
+            onClick={() => pushToDataLayer({ event: "whatsapp_click", active_menu_context: activeMenu })}
+          >
             <span className='wa-dot' />
             Haz tu pedido ahora por WhatsApp
           </a>
@@ -139,7 +148,15 @@ export default function DoradaFoodsLinkPage() {
           <span>Síguenos</span>
           <div className='list'>
             {SOCIAL_LINKS.map((social) => (
-              <SocialRow key={social.name} {...social} />
+              <SocialRow
+                key={social.name}
+                {...social}
+                onClick={
+                  social.href === WHATSAPP_URL
+                    ? () => pushToDataLayer({ event: "whatsapp_click", active_menu_context: activeMenu })
+                    : undefined
+                }
+              />
             ))}
           </div>
         </section>
