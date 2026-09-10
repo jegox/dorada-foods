@@ -1,8 +1,19 @@
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
+import { Bricolage_Grotesque, Karla } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+
+const bricolageGrotesque = Bricolage_Grotesque({
+  subsets: ['latin'],
+  weight: ['600', '700', '800'],
+  variable: '--font-bricolage',
+})
+
+const karla = Karla({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-karla',
+})
 
 export const metadata: Metadata = {
   title: 'Dorada Foods Restaurante',
@@ -16,20 +27,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-html {
-  font-family: ${GeistSans.style.fontFamily};
-  --font-sans: ${GeistSans.variable};
-  --font-mono: ${GeistMono.variable};
-}
-            `,
-          }}
-        />
-      </head>
+    <html lang="en" className={`${bricolageGrotesque.variable} ${karla.variable}`}>
       <body>
         {children}
         <Analytics />

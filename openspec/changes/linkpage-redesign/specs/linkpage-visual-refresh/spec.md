@@ -32,12 +32,12 @@ When the visitor's system preference is `prefers-reduced-motion: reduce`, all an
 - **WHEN** a visitor with `prefers-reduced-motion: reduce` loads the landing page
 - **THEN** the background blobs, menu card shine sweep, and other decorative animations do not animate
 
-### Requirement: Corrected menu copy
-The first menu card's title SHALL read "Sabores Gourmet y Tradicionales" (not "Saborees Gourmet y Tradicionales").
+### Requirement: Current menu card titles, not the frozen mockup copy
+The first menu card's title SHALL read "Desayunos y Almuerzos", matching the live site's current naming (renamed from "Sabores/Saborees Gourmet y Tradicionales" prior to this change) rather than the design handoff's frozen copy.
 
-#### Scenario: Menu title is spelled correctly
+#### Scenario: Menu title matches current live naming
 - **WHEN** the landing page is rendered
-- **THEN** the first menu card's visible title text is exactly "Sabores Gourmet y Tradicionales"
+- **THEN** the first menu card's visible title text is exactly "Desayunos y Almuerzos"
 
 ### Requirement: WhatsApp CTA shown twice
 The WhatsApp ordering link SHALL appear both as a dedicated CTA button within the "Nuestras cartas" section and as a row within the "Síguenos" social list.

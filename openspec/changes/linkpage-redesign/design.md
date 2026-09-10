@@ -61,6 +61,11 @@ Relevant precedent already in this codebase: a font `<style>` block in `app/layo
 
 Single PR/change touching only this one route's presentation layer (`app/page.tsx`, `app/layout.tsx`, new `components/linkpage/*`, `tailwind.config.ts`, `app/globals.css`, new files under `public/dorada/`). No data or API migration. Rollback is a plain `git revert`.
 
+## Implementation Notes (post-hoc)
+
+- **`app/page.tsx` became the single client-side orchestrator**, not a separate `menu-section.tsx`/`menu-experience.tsx` wrapper as sketched above. Reason found during implementation: the `.fx` photo layers must stay DOM siblings of `<main>` (matching the mockup), not nested inside it — `main` has `position:relative; z-index:1`, which creates its own stacking context, so any `position:fixed` `.fx` layer nested inside it would paint *above* the in-flow header/menu text instead of behind it. Keeping `AmbientBackground`, `MenuPhotoLayer`, and `<main>` as top-level siblings (all owned by one client component) avoids that bug entirely. `menu-photo-layer.tsx`, `menu-card.tsx`, `ambient-background.tsx`, and `social-row.tsx` were still built as separate presentational components as planned.
+- **Menu card title deviates from the frozen mockup copy**: see `specs/linkpage-visual-refresh/spec.md` — the live title had already moved to "Desayunos y Almuerzos" before this session; implementation uses that instead of reverting to "Sabores Gourmet y Tradicionales".
+
 ## Open Questions
 
 - Working assumption carried from the explore conversation, not yet explicitly re-confirmed: on mobile, touching/tapping a menu card does **not** affect the photo layer at all — it stays purely clock-driven, and tapping the card just navigates to the PDF as normal. Flagging here so it's easy to correct if that's wrong before/during implementation.
