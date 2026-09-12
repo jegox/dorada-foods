@@ -9,14 +9,16 @@ import { MenuPhotoLayer } from "@/components/linkpage/menu-photo-layer";
 import { MenuCard } from "@/components/linkpage/menu-card";
 import { SocialRow } from "@/components/linkpage/social-row";
 
+const version = Date.now();
+
 const GOURMET_MENU = {
-  href: "/docs/dorada-foods-almuerzos.pdf",
+  href: `docs/dorada-foods-almuerzos.pdf?v=${version}`,
   title: "Desayunos y Almuerzos",
   subtitle: "Ver menú completo en PDF",
 };
 
 const RAPIDAS_MENU = {
-  href: "/docs/dorada-foods-comida-rapida.pdf",
+  href: `/docs/dorada-foods-comida-rapida.pdf?v=${version}`,
   title: "Comidas Rápidas y Asados",
   subtitle: "Ver menú de comidas rápidas y asados en PDF",
 };
@@ -102,7 +104,13 @@ export default function DoradaFoodsLinkPage() {
             variant='gourmet'
             onPointerActivate={hoverCapable ? () => setHoveredMenu("gourmet") : undefined}
             onPointerDeactivate={hoverCapable ? () => setHoveredMenu(null) : undefined}
-            onClick={() => pushToDataLayer({ event: "menu_click", menu: "gourmet", active_menu_context: activeMenu })}
+            onClick={() =>
+              pushToDataLayer({
+                event: "menu_click",
+                menu: "gourmet",
+                active_menu_context: activeMenu,
+              })
+            }
           />
 
           <MenuCard
@@ -112,7 +120,13 @@ export default function DoradaFoodsLinkPage() {
             variant='rapidas'
             onPointerActivate={hoverCapable ? () => setHoveredMenu("rapidas") : undefined}
             onPointerDeactivate={hoverCapable ? () => setHoveredMenu(null) : undefined}
-            onClick={() => pushToDataLayer({ event: "menu_click", menu: "rapidas", active_menu_context: activeMenu })}
+            onClick={() =>
+              pushToDataLayer({
+                event: "menu_click",
+                menu: "rapidas",
+                active_menu_context: activeMenu,
+              })
+            }
           />
 
           <a
@@ -120,7 +134,9 @@ export default function DoradaFoodsLinkPage() {
             href={WHATSAPP_URL}
             target='_blank'
             rel='noopener noreferrer'
-            onClick={() => pushToDataLayer({ event: "whatsapp_click", active_menu_context: activeMenu })}
+            onClick={() =>
+              pushToDataLayer({ event: "whatsapp_click", active_menu_context: activeMenu })
+            }
           >
             <span className='wa-dot' />
             Haz tu pedido ahora por WhatsApp
@@ -153,7 +169,11 @@ export default function DoradaFoodsLinkPage() {
                 {...social}
                 onClick={
                   social.href === WHATSAPP_URL
-                    ? () => pushToDataLayer({ event: "whatsapp_click", active_menu_context: activeMenu })
+                    ? () =>
+                        pushToDataLayer({
+                          event: "whatsapp_click",
+                          active_menu_context: activeMenu,
+                        })
                     : undefined
                 }
               />
